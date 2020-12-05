@@ -73,3 +73,27 @@ let seznam_id seznam =
     aux seznam []
 
 let naloga1 = input |> preberi_datoteko |> seznam |> seznam_id |> najdi_max |> string_of_int
+
+let najdi_zaporedne seznam =
+    let rec pomozna stevec seznam = 
+        if List.mem (stevec - 1) seznam && List.mem (stevec + 1) seznam && not(List.mem stevec seznam) then 
+            if stevec > 100 then stevec else pomozna (stevec+1) seznam 
+        else pomozna (stevec+1) seznam in
+    pomozna 0 seznam
+
+
+let naloga2 = input |> preberi_datoteko |> seznam |> seznam_id |> najdi_zaporedne |> string_of_int
+
+let _ =
+
+    let izpisi_datoteko ime_datoteke vsebina =
+        let chan = open_out ime_datoteke in
+        output_string chan vsebina;
+        close_out chan
+    in
+    
+    let odgovor1 = naloga1
+    and odgovor2 = naloga2
+    in
+    izpisi_datoteko "day_5/day_5_1.out" odgovor1;
+    izpisi_datoteko "day_5/day_5_2.out"  odgovor2;
