@@ -59,13 +59,6 @@ let prestej seznam =
 
 let naloga1 = input |> preberi_datoteko |> seznam |> razbij |> poenoti |> prestej |> string_of_int
 
-(*https://discuss.ocaml.org/t/how-to-sort-a-string-in-ocaml/4904/3*)
-let sort s = 
-  String.to_seq s |> List.of_seq |> List.sort Char.compare |> List.to_seq |> String.of_seq
-
-let rec uredi_nize = function
-    | [] -> []
-    | x :: xs -> (sort x) :: (uredi_nize xs)
 
 let v_vseh seznami char = if  List.length (odstrani_dvojnike (List.map (List.mem char) (List.map seznam_znakov seznami))) > 0 then List.hd(odstrani_dvojnike (List.map (List.mem char) (List.map seznam_znakov seznami)))
     else true
