@@ -67,14 +67,25 @@ let rec uredi_nize = function
     | [] -> []
     | x :: xs -> (sort x) :: (uredi_nize xs)
 
-let vse_v_enega seznam = 
-    let rec aux acc seznam = match seznam with
-        | [] -> acc
-        | x :: xs -> aux ((seznam_znakov x) @ acc) xs in
-    aux [] seznam
+let v_vseh seznami char = if  List.length (odstrani_dvojnike (List.map (List.mem char) (List.map seznam_znakov seznami))) > 0 then List.hd(odstrani_dvojnike (List.map (List.mem char) (List.map seznam_znakov seznami)))
+    else true
 
 
-let v_vseh seznami char = List.hd (odstrani_dvojnike (List.map (List.mem char) (List.map seznam_znakov seznami)))        
+let prestej_vrstico seznam chars =
+    let rec aux seznam znaki count = match znaki with
+        | [] -> count
+        | x :: xs -> if v_vseh seznam x then aux seznam xs (count+1) else aux seznam xs count in
+    aux seznam chars 0
+
+let prestej_dvojne seznam = 
+    let rec pomozna stevec seznam = match seznam with
+        | [] -> stevec
+        | x :: xs -> match x with
+            | znaki :: ostalo -> pomozna (stevec + prestej_vrstico ostalo (seznam_znakov znaki)) xs
+            | _ -> failwith "tema" in
+    pomozna 0 seznam
+        
+let naloga2 = input |> preberi_datoteko |> seznam |> razbij |> poenoti |> prestej_dvojne |> string_of_int
 
 let _ =
 
@@ -85,7 +96,7 @@ let _ =
     in
     
     let odgovor1 = naloga1
-    (*and odgovor2 = naloga2*)
+    and odgovor2 = naloga2
     in
     izpisi_datoteko ("day_" ^ day ^ "/day_" ^ day ^"_1.out") odgovor1;
-    (*izpisi_datoteko "day_5/day_5_2.out"  odgovor2;*)
+    izpisi_datoteko ("day_" ^ day ^ "/day_" ^ day ^"_2.out")  odgovor2;
