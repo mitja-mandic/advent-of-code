@@ -9,8 +9,8 @@ let preberi_datoteko ime_datoteke =
     vsebina
 
 let seznam vsebina_datoteke = String.split_on_char '\n' vsebina_datoteke
-let dat = seznam(preberi_datoteko input)
 
+ (* koda za razbijanje seznama je prirejena po moji kodi iz dneva 4 *)
 let razbij seznam = 
     let rec razbij_seznam seznam prazen = 
         let rec dodaj seznam gradimo = match seznam with
@@ -53,3 +53,5 @@ let prestej seznam =
         | [] -> stevec
         | x :: xs -> pomozna xs (stevec + prestej_enega x) in
     pomozna seznam 0
+
+let naloga1 = input |> preberi_datoteko |> seznam |> razbij |> poenoti |> prestej |> string_of_int
