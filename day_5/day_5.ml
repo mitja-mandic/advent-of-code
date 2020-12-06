@@ -95,5 +95,5 @@ let _ =
     let odgovor1 = naloga1
     and odgovor2 = naloga2
     in
-    izpisi_datoteko "day_5/day_5_1.out" odgovor1;
-    izpisi_datoteko "day_5/day_5_2.out"  odgovor2;
+    izpisi_datoteko ("day_" ^ day ^ "/day_" ^ day ^ "_1.out") odgovor1;
+    izpisi_datoteko ("day_" ^ day ^ "/day_" ^ day ^ "_2.out")  odgovor2;

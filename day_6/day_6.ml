@@ -36,6 +36,9 @@ let poenoti seznam =
         | x :: xs -> pomozna xs [en_seznam x] @ gradim in
     pomozna seznam []
 
+let dat = input |> preberi_datoteko |> seznam
+
+
 (*vir kode https://reasonml.chat/t/iterate-over-a-string-pattern-match-on-a-string/1317 *)
 let seznam_znakov string = string |> String.to_seq |> List.of_seq
 
@@ -55,3 +58,34 @@ let prestej seznam =
     pomozna seznam 0
 
 let naloga1 = input |> preberi_datoteko |> seznam |> razbij |> poenoti |> prestej |> string_of_int
+
+(*https://discuss.ocaml.org/t/how-to-sort-a-string-in-ocaml/4904/3*)
+let sort s = 
+  String.to_seq s |> List.of_seq |> List.sort Char.compare |> List.to_seq |> String.of_seq
+
+let rec uredi_nize = function
+    | [] -> []
+    | x :: xs -> (sort x) :: (uredi_nize xs)
+
+let vse_v_enega seznam = 
+    let rec aux acc seznam = match seznam with
+        | [] -> acc
+        | x :: xs -> aux ((seznam_znakov x) @ acc) xs in
+    aux [] seznam
+
+
+let v_vseh seznami char = List.hd (odstrani_dvojnike (List.map (List.mem char) (List.map seznam_znakov seznami)))        
+
+let _ =
+
+    let izpisi_datoteko ime_datoteke vsebina =
+        let chan = open_out ime_datoteke in
+        output_string chan vsebina;
+        close_out chan
+    in
+    
+    let odgovor1 = naloga1
+    (*and odgovor2 = naloga2*)
+    in
+    izpisi_datoteko ("day_" ^ day ^ "/day_" ^ day ^"_1.out") odgovor1;
+    (*izpisi_datoteko "day_5/day_5_2.out"  odgovor2;*)
