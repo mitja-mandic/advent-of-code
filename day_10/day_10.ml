@@ -23,3 +23,16 @@ let prestej_razlike seznam =
     aux seznam 0 0 (List.hd seznam)
 
 let naloga1 datoteka = datoteka |> preberi_datoteko |> int_list |> uredi |> prestej_razlike |> string_of_int
+
+let _ =
+    let izpisi_datoteko ime_datoteke vsebina =
+        let chan = open_out ime_datoteke in
+        output_string chan vsebina;
+        close_out chan
+    in
+    
+    let odgovor1 = naloga1 input
+    
+    in
+    izpisi_datoteko ("day_" ^ day ^ "/day_" ^ day ^ "_1.out") odgovor1;
+    
