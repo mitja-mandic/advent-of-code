@@ -31,9 +31,9 @@ let najdi_naslednje seznam prejsnje =
         zadnji - predzadnji
 
 let stevilo seznam ponovitve=
-    let dolzina = List.length seznam + 1 in
+    let zacetek = List.length seznam + 1 in
     let delovni = ref seznam in
-    for  i = dolzina to ponovitve do
+    for  i = zacetek to ponovitve do
         let zadnji_element = List.hd(List.rev !delovni) in 
         let naslednji = najdi_naslednje !delovni zadnji_element in
         delovni := !delovni @ [naslednji]
